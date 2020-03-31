@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="CSS/styles.css">
+    <!-- <link type="text/css" rel="stylesheet" href="http://localhost:5500/styles.css"> -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- <script src="..//node_modules/socket.io/lib/socket.js"></script> -->
+    <!-- for server testing -->
+    <!-- <link type="text/css" rel="stylesheet" href="http://127.0.0.1:5500/styles.css"> -->
+    <!-- <script src="http://127.0.0.1:5500/socket.io/socket.io.js"></script> -->
+    <!-- <script src="http://localhost:5500/socket.io/socket.io.js"></script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect 4</title>
+</head>
+
+<body>
+    <h1>Connect Four
+        <!-- adding button to get back to about me -->
+        <!-- <a href="../index.html" title="Back to About Me "> -->
+        <button id="goBack">&#9756;</button>
+        </a>
+    </h1>
+    <h3 class="playerTurn"> </h3>
+    <div class="board">
+        <!-- board that connect 4 will be created with, will have 42 slots-->
+        <table>
+            <tr>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+            </tr>
+            <tr>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+            </tr>
+            <tr>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+            </tr>
+            <tr>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+            </tr>
+            <tr>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+            </tr>
+            <tr>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+                <td class="slot"></td>
+            </tr>
+
+        </table>
+    </div>
+    <!-- reset button to restart game  -->
+    <div class="resetMe"> Reset Game</div>
+    <!-- link to script -->
+    <script src="Logic/script.js"></script>
+
+</body>
+
+</html>
