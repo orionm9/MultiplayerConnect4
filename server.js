@@ -2,7 +2,7 @@
 // CS 479
 // Setting up server
 
-/// Dependencies
+/// Dependencies/Middlewear
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -26,6 +26,34 @@ server.listen(5500, function() {
 
 // Add the WebSocket handlers
 io.on('connection', function(socket) {});
-setInterval(function() {
-    io.sockets.emit('message', 'hi!');
-}, 1000);
+// sending message to test server
+// setInterval(function() {
+//     io.sockets.emit('message', 'hi!');
+// }, 1000);
+
+var players = {};
+io.on('connection', function(socket) {
+    socket.on('new player', function() {
+        players[socket.id] = {
+            myTurn: false
+        };
+        io.sockets.emit('message', socket.id + ' has joined');
+
+
+    });
+    // socket.on('movement', function(data) {
+    //     var player = players[socket.id] || {};
+    //     if (data.left) {
+    //         player.x -= 5;
+    //     }
+    //     if (data.up) {
+    //         player.y -= 5;
+    //     }
+    //     if (data.right) {
+    //         player.x += 5;
+    //     }
+    //     if (data.down) {
+    //         player.y += 5;
+    //     }
+    // });
+});

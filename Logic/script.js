@@ -2,20 +2,33 @@
 // CS 479
 // Connect 4 game for personal website to demonstrate js, html, & css
 
-//server testing
-var socket = io();
-socket.on('message', function(data) {
-    console.log(data);
-});
+// server testing
+// Making sure window loads completely before starting
+window.onload = function() {
+    var socket = io();
+    //Testing server by sending message out
+    socket.on('message', function(data) {
+        console.log(data);
+    });
+    //creating a new player when tab is opened
+    socket.emit('new player');
+    // setInterval(function() {
+    //     socket.emit('movement', movement);
+    // }, 1000 / 60);
+}
+
+
 
 // Prompt players to enter name
-while (!player1) {
-    var player1 = prompt('Player One you will be red:');
-};
+// while (!player1) {
+//     var player1 = prompt('Player One you will be red:');
+// };
 
-while (!player2) {
-    var player2 = prompt('Player Two you will be yellow:');
-};
+// while (!player2) {
+//     var player2 = prompt('Player Two you will be yellow:');
+// };
+var player1 = "Red";
+var player2 = "Yellow";
 
 
 //set colors for players to fill slots with when it's their turn
