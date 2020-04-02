@@ -30,17 +30,31 @@ io.on('connection', function(socket) {});
 // setInterval(function() {
 //     io.sockets.emit('message', 'hi!');
 // }, 1000);
-
-var players = {};
+// var players = {};
+const gameState = {
+    players: {}
+}
+var playerCount = 0;
 io.on('connection', function(socket) {
     socket.on('new player', function() {
-        players[socket.id] = {
+        playerCount += 1
+        gameState.players[socket.id] = {
+            Pid: playerCount,
             myTurn: false
         };
-        io.sockets.emit('message', socket.id + ' has joined');
+        io.sockets.emit('message', socket.id + ' has joined, id: ' + gameState.players.Pid);
+    }); // end of new player
+    //sending gamestate to all sockets
+
+    //trying something
+    // socket.on('new player', () => {
+    //         players[socket.id] = {
+    //             Pid: 1
+    //         };
+    //     },
+    //     io.sockets.emit('message', socket.id + ' has joined, id: ' + players[socket.id]));
 
 
-    });
     // socket.on('movement', function(data) {
     //     var player = players[socket.id] || {};
     //     if (data.left) {
@@ -57,3 +71,9 @@ io.on('connection', function(socket) {
     //     }
     // });
 });
+// setInterval(() => {
+//     io.socket.emit('state', gameState);
+// }, 1000 / 60);
+setInterval(function() {
+    io.sockets.emit('state', gameState);
+}, 1000 / 60);

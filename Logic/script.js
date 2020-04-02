@@ -5,16 +5,45 @@
 // server testing
 // Making sure window loads completely before starting
 window.onload = function() {
-    var socket = io();
-    //Testing server by sending message out
-    socket.on('message', function(data) {
-        console.log(data);
-    });
-    //creating a new player when tab is opened
-    socket.emit('new player');
-    // setInterval(function() {
-    //     socket.emit('movement', movement);
-    // }, 1000 / 60);
+        var socket = io();
+        //Testing server by sending message out
+        socket.on('message', function(data) {
+            console.log(data);
+        });
+        //creating a new player when tab is opened
+        socket.emit('new player');
+
+        // socket.on('state', (gameState) => {
+        //         for (let player in gameState.players) {
+        //             rawPlayer(gameState.players[player])
+        //         }
+        //     }
+        // });
+        // game state
+        socket.on('state', function(gameState) {
+            for (let player in gameState.players) {
+                Myplayer(gameState.players[player])
+            }
+        });
+
+    } // end of onload
+
+function Myplayer(player) {
+    console.log(player.Pid);
+    console.log(player.myTurn + " before");
+    player.myTurn = true;
+    console.log(player.myTurn + " after");
+
+
+
+
+}
+// Player movements
+const playerMovement = {
+    red: false,
+    yellow: false,
+    playerOne: false,
+    playerTwo: false
 }
 
 
@@ -27,8 +56,8 @@ window.onload = function() {
 // while (!player2) {
 //     var player2 = prompt('Player Two you will be yellow:');
 // };
-var player1 = "Red";
-var player2 = "Yellow";
+var player1 = "Red Guy";
+var player2 = "Yellow Guy";
 
 
 //set colors for players to fill slots with when it's their turn
