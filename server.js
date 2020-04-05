@@ -39,41 +39,32 @@ io.on('connection', function(socket) {
     socket.on('new player', function() {
         playerCount += 1
         gameState.players[socket.id] = {
-            Pid: playerCount,
-            myTurn: false
+            Pid: playerCount
         };
-        io.sockets.emit('message', socket.id + ' has joined, id: ' + gameState.players.Pid);
+        io.sockets.emit('message', socket.id + ' has joined ');
     }); // end of new player
-    //sending gamestate to all sockets
-
-    //trying something
-    // socket.on('new player', () => {
-    //         players[socket.id] = {
-    //             Pid: 1
-    //         };
-    //     },
-    //     io.sockets.emit('message', socket.id + ' has joined, id: ' + players[socket.id]));
-
-
-    // socket.on('movement', function(data) {
-    //     var player = players[socket.id] || {};
-    //     if (data.left) {
-    //         player.x -= 5;
-    //     }
-    //     if (data.up) {
-    //         player.y -= 5;
-    //     }
-    //     if (data.right) {
-    //         player.x += 5;
-    //     }
-    //     if (data.down) {
-    //         player.y += 5;
-    //     }
+    // socket.on('board update', function(row) {
+    //     socket.emit('update', row);
     // });
-});
-// setInterval(() => {
-//     io.socket.emit('state', gameState);
-// }, 1000 / 60);
+    socket.on("PlayerMoved", function(data) {
+        socket.broadcast.emit("PlayerMoved", data);
+    });
+    socket.on('playerMovement', function(data) {
+
+        var player = gameState.players[socket.id] || {};
+        if (data.redTurn) {
+            player.redTurn = true;
+            player.yellowTurn = false;
+        }
+
+        if (data.yellowTurn) {
+            player.yellowTurn = true;
+            player.redTurn = false;
+        }
+    });
+
+}); // end of connection
+
 setInterval(function() {
     io.sockets.emit('state', gameState);
-}, 1000 / 60);
+});
